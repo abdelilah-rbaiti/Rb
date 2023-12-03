@@ -41,10 +41,18 @@ pipeline {
                }
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    buildDockerImage('java-app')
+                stage('Build Docker Image') {
+                    steps {
+                       script {
+                            DOCKER_IMAGE_NAME = buildDockerImage('java-app')
+                            echo "Built Docker image: ${DOCKER_IMAGE_NAME}"
+                }
+            }
+        }
+                stage('Scan Docker Image with Trivy') {
+                    steps {
+                    script {
+                            scanDockerImage(DOCKER_IMAGE_NAME)
                 }
             }
         }
