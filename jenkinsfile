@@ -49,10 +49,13 @@ pipeline {
                 }
             }
         }
-                stage('Scan Docker Image with Trivy') {
-                    steps {
-                    script {
-                            scanDockerImage(DOCKER_IMAGE_NAME)
+               stage('Docker Image Scan: trivy') {
+            steps {
+                script {
+                    // Scan Docker image using Trivy
+                    scanDockerImage(DOCKER_IMAGE_NAME)
+                    // Display scan results
+                    sh "cat scan.txt"
                 }
             }
         }
