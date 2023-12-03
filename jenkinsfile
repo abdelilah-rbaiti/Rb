@@ -1,5 +1,7 @@
 @Library('jenkins_shared_library@main') _
 pipeline {
+      environment {
+        DOCKER_IMAGE_NAME = ''
     agent any
     stages {
         stage('Git Checkout') {
