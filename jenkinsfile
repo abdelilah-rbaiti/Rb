@@ -50,9 +50,6 @@ pipeline {
             }
         }
                stage('Scan Docker Image with Trivy') {
-            when {
-                expression { params.action == 'create' }
-            }
             steps {
                 script {
                     // Call the scanDockerImage function from the shared library
