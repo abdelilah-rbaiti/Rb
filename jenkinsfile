@@ -49,13 +49,14 @@ pipeline {
                 }
             }
         }
-               stage('Docker Image Scan: trivy') {
+               stage('Scan Docker Image with Trivy') {
+            when {
+                expression { params.action == 'create' }
+            }
             steps {
                 script {
-                    // Scan Docker image using Trivy
+                    // Call the scanDockerImage function from the shared library
                     scanDockerImage(DOCKER_IMAGE_NAME)
-                    // Display scan results
-                    sh "cat scan.txt"
                 }
             }
         }
